@@ -1,12 +1,38 @@
-import { useEffect } from 'react';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { setupMusicPlayer } from './services/playerSetup';
+import { loadPlaylist } from './services/musicPlayer';
 
 function App() {
+  const [isPlyerReady, setIsPlyerReady] = useState(false);
+
+  async function setup() {
+    let isSetUp = await setupMusicPlayer();
+
+    if (isSetUp) {
+      await loadPlaylist();
+    }
+    setIsPlyerReady(isSetUp);
+  }
+
   useEffect(() => {
-    setupMusicPlayer();
+    setup();
   }, []);
+
+  if (!isPlyerReady) {
+    return (
+      <SafeAreaView>
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaProvider>
