@@ -2,6 +2,6 @@ import TrackPlayer from '@rntp/player';
 
 import { playListData } from '../constants';
 
-export async function loadPlaylist() {
+export const loadPlaylist = () => {
   TrackPlayer.setMediaItems(playListData);
-}
+};

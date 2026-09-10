@@ -13,14 +13,14 @@ import { loadPlaylist } from './services/musicPlayer';
 function App() {
   const [isPlyerReady, setIsPlyerReady] = useState(false);
 
-  async function setup() {
-    let isSetUp = await setupMusicPlayer();
+  const setup = () => {
+    let isSetUp = setupMusicPlayer();
 
     if (isSetUp) {
-      await loadPlaylist();
+      loadPlaylist();
     }
     setIsPlyerReady(isSetUp);
-  }
+  };
 
   useEffect(() => {
     setup();

@@ -1,11 +1,7 @@
 import TrackPlayer, { PlayerCommand } from '@rntp/player';
 
-export async function setupMusicPlayer() {
-  let isSetUp = false;
+export const setupMusicPlayer = () => {
   try {
-    TrackPlayer.getActiveMediaItem();
-    isSetUp = true;
-  } catch (error) {
     TrackPlayer.setupPlayer({
       contentType: 'music',
     });
@@ -17,8 +13,10 @@ export async function setupMusicPlayer() {
         PlayerCommand.Previous,
       ],
     });
-    isSetUp = true;
-  } finally {
-    return isSetUp;
+
+    return true;
+  } catch (error) {
+    console.error('Failed to setup music player:', error);
+    return false;
   }
-}
+};
