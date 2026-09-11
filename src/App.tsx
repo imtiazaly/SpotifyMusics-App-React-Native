@@ -9,6 +9,7 @@ import {
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { setupMusicPlayer } from './services/playerSetup';
 import { loadPlaylist } from './services/loadPlaylist';
+import MusicPlayer from './screens/MusicPlayer';
 
 function App() {
   const [isPlyerReady, setIsPlyerReady] = useState(false);
@@ -37,8 +38,8 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar />
-      <SafeAreaView>
-        <Text>This App is going to be a Spotify Music App!</Text>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#001d23' }}>
+        <MusicPlayer />
       </SafeAreaView>
     </SafeAreaProvider>
   );

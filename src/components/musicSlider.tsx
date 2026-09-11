@@ -4,6 +4,15 @@ import { useProgress } from '@rntp/player';
 
 const MusicSlider = () => {
   const { position, duration } = useProgress();
+
+  const formatTime = (seconds: number) => {
+    if (!Number.isFinite(seconds) || seconds < 0) {
+      return '00:00';
+    }
+
+    return new Date(seconds * 1000).toISOString().slice(14, 19);
+  };
+
   return (
     <View>
       <Slider
@@ -15,12 +24,9 @@ const MusicSlider = () => {
         thumbTintColor="#FFFFFF"
       />
       <View style={styles.timeContainer}>
-        <Text style={styles.time}>
-          {new Date(position * 1000).toISOString().substr(14, 5)}
-        </Text>
-        <Text style={styles.time}>
-          {new Date(duration - position * 1000).toISOString().substr(14, 5)}
-        </Text>
+        <Text style={styles.time}>{formatTime(position)}</Text>
+
+        <Text style={styles.time}>{formatTime(duration - position)}</Text>
       </View>
     </View>
   );

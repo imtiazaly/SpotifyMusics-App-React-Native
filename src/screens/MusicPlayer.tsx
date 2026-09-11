@@ -6,27 +6,23 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
 import { MediaItem } from '@rntp/player';
-import TrackPlayer from '@rntp/player';
 import { useActiveMediaItem } from '@rntp/player';
 import { playListData } from '../constants';
-import MusicSlider from '../components/musicSlider';
+import MusicSlider from '../components/MusicSlider';
 import ControlCenter from '../components/ControlCenter';
-import MusicInfo from '../components/musicInfo';
-
+import MusicInfo from '../components/MusicInfo';
 const { width } = Dimensions.get('window');
 
 const MusicPlayer = () => {
   const track = useActiveMediaItem();
-  if (!track) return null;
 
   const renderArtwork = () => {
     return (
       <View style={styles.listArtWrapper}>
         <View style={styles.albumContainer}>
           <Image
-            source={{ uri: track.artworkUrl?.toString() }}
+            source={{ uri: track?.artworkUrl?.toString() }}
             style={styles.albumArtImg}
           />
         </View>
