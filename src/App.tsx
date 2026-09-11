@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { setupMusicPlayer } from './services/playerSetup';
-import { loadPlaylist } from './services/musicPlayer';
+import { loadPlaylist } from './services/loadPlaylist';
 
 function App() {
   const [isPlyerReady, setIsPlyerReady] = useState(false);

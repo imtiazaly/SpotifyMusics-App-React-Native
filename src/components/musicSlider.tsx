@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { useProgress } from '@rntp/player';
 
-const musicSlider = () => {
+const MusicSlider = () => {
   const { position, duration } = useProgress();
   return (
     <View>
@@ -26,7 +26,7 @@ const musicSlider = () => {
   );
 };
 
-export default musicSlider;
+export default MusicSlider;
 
 const styles = StyleSheet.create({
   sliderContainer: {

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import TrackPlayer, { useIsPlaying } from '@rntp/player';
 import Ionicons from '@react-native-vector-icons/ionicons';
 
-const controlCenter = () => {
+const ControlCenter = () => {
   const playing = useIsPlaying();
 
   const skipToNext = () => {
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default controlCenter;
+export default ControlCenter;

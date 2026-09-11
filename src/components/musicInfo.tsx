@@ -2,11 +2,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import React, { PropsWithChildren } from 'react';
 import { MediaItem } from '@rntp/player';
 
-type musicInfoProps = PropsWithChildren<{
+type MusicInfoProps = PropsWithChildren<{
   track: MediaItem | null | undefined;
 }>;
 
-const musicInfo = ({ track }: musicInfoProps) => {
+const MusicInfo = ({ track }: MusicInfoProps) => {
   return (
     <View style={styles.container}>
       <View>
@@ -20,7 +20,7 @@ const musicInfo = ({ track }: musicInfoProps) => {
   );
 };
 
-export default musicInfo;
+export default MusicInfo;
 
 const styles = StyleSheet.create({
   container: {
