@@ -2,48 +2,75 @@ import { MediaItem } from '@rntp/player';
 
 export const playListData: MediaItem[] = [
   {
-    mediaId: '1', // Fixed: String format required
-    title: 'Maan Meri Jaan',
-    artist: 'King',
-    albumTitle: 'Champagne Talk',
-    artworkUrl:
-      'https://c.saavncdn.com/734/Champagne-Talk-Hindi-2022-20221008011951-500x500.jpg',
-    url: require('./assets/audio/one.mp3') as string, // Fixed: Cast asset reference for TS
+    mediaId: '1',
+    title: 'Tajdar E Haram',
+    artist: 'Hammad Nagri',
+    albumTitle: 'Milad Naat 2026',
+    artworkUrl: 'https://img.youtube.com/vi/J5IIjyk17SU/maxresdefault.jpg',
+    url: require('./assets/audio/one.mp3') as string,
   },
   {
     mediaId: '2',
-    title: 'Raataan Lambiyan',
-    artist: 'Tanishk Bagchi, Asees Kaur',
-    albumTitle: 'Shershaah',
-    artworkUrl:
-      'https://c.saavncdn.com/238/Shershaah-Original-Motion-Picture-Soundtrack--Hindi-2021-20210815181610-500x500.jpg',
+    title: 'Ya Nabi Muaj Pa Be Aik Nigahay Karam',
+    artist: 'Hammad Ali Nagri',
+    albumTitle: 'New Rabi ul Awal Naat 2025',
+    artworkUrl: 'https://img.youtube.com/vi/49_eck_2nvI/maxresdefault.jpg',
     url: require('./assets/audio/two.mp3') as string,
   },
   {
     mediaId: '3',
-    title: 'Kesariya',
-    artist: 'Arijit Singh, Amitabh Bhattacharya',
-    albumTitle: 'Brahmastra',
-    artworkUrl:
-      'https://c.saavncdn.com/191/Kesariya-From-Brahmastra-Hindi-2022-20220717092820-500x500.jpg',
+    title: 'Ya Muhammad Sallay Ala (Qawwali)',
+    artist: 'Sibtain Haider',
+    albumTitle: 'TNA Records',
+    artworkUrl: 'https://img.youtube.com/vi/p-Gj5Flj0Wk/maxresdefault.jpg',
     url: require('./assets/audio/three.mp3') as string,
   },
   {
     mediaId: '4',
-    title: 'Title Track',
-    artist: 'Arijit Singh, Parampara Tandon',
-    albumTitle: 'Pal Pal Dil Ke Paas',
-    artworkUrl:
-      'https://c.saavncdn.com/328/Pal-Pal-Dil-Ke-Paas-Hindi-2019-20200420150444-500x500.jpg',
+    title: 'Aamad E Mustafa',
+    artist: 'Gul e Zahra',
+    albumTitle: 'Rabi ul Awal Kalam 2026',
+    artworkUrl: 'https://img.youtube.com/vi/ID8jS0DK-qM/maxresdefault.jpg',
     url: require('./assets/audio/four.mp3') as string,
   },
   {
     mediaId: '5',
-    title: 'Besharam Rang',
-    artist: 'Vishal & Shekhar, Shilpa Rao',
-    albumTitle: 'Pathaan',
-    artworkUrl:
-      'https://c.saavncdn.com/807/Pathaan-Hindi-2022-20221222104158-500x500.jpg',
+    title: 'Ankhon Mein Bas Gaya Hai Madina Huzoor Ka',
+    artist: 'Armeena Aijaz',
+    albumTitle: 'Rabi Ul Awal 2026 - TNA Records',
+    artworkUrl: 'https://img.youtube.com/vi/vgvj32Vxe8s/maxresdefault.jpg',
     url: require('./assets/audio/five.mp3') as string,
+  },
+  {
+    mediaId: '6',
+    title: 'Mustafa Mustafa Aap Khair-ul-Bashar (Slowed & Reverb)',
+    artist: 'Unknown Artist',
+    albumTitle: 'Heart Touching Naat',
+    artworkUrl: 'https://img.youtube.com/vi/syEl7yz6LNw/maxresdefault.jpg',
+    url: require('./assets/audio/six.mp3') as string,
+  },
+  {
+    mediaId: '7',
+    title: 'Han Ali Ali',
+    artist: 'Faizan Abbas',
+    albumTitle: '13 Rajab Shina Manqabat 2024',
+    artworkUrl: 'https://img.youtube.com/vi/mPqEhfyiml8/maxresdefault.jpg',
+    url: require('./assets/audio/seven.mp3') as string,
+  },
+  {
+    mediaId: '8',
+    title: 'Wo Shehr E Mohabbat',
+    artist: 'Syed Salih Jalali',
+    albumTitle: 'New Rabiul Awwal Naat 2026',
+    artworkUrl: 'https://img.youtube.com/vi/4OX_nOAPrY4/maxresdefault.jpg',
+    url: require('./assets/audio/eight.mp3') as string,
+  },
+  {
+    mediaId: '9',
+    title: 'Mujh Pa Bhi Aik Karam',
+    artist: 'Hammad Nagri / Danish Ammar',
+    albumTitle: 'New Naat 2026 - Rabi ul Awal 2026',
+    artworkUrl: 'https://img.youtube.com/vi/KP9zM2IFefQ/maxresdefault.jpg',
+    url: require('./assets/audio/nine.mp3') as string,
   },
 ];
