@@ -1,0 +1,46 @@
+import { StyleSheet, Text, View } from 'react-native';
+import React, { PropsWithChildren } from 'react';
+import { MediaItem } from '@rntp/player';
+
+type musicInfoProps = PropsWithChildren<{
+  track: MediaItem | null | undefined;
+}>;
+
+const musicInfo = ({ track }: musicInfoProps) => {
+  return (
+    <View style={styles.container}>
+      <View>
+        <Text style={styles.name}>{track?.title || 'Unknown Title'}</Text>
+        <Text style={styles.artist}>
+          {track?.artist || 'Unknown Artist'} .
+          {track?.albumTitle || 'Unknown Album'}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+export default musicInfo;
+
+const styles = StyleSheet.create({
+  container: {
+    width: '90%',
+    marginTop: 18,
+
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'center',
+  },
+  name: {
+    marginBottom: 8,
+    textAlign: 'center',
+
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: '800',
+  },
+  artist: {
+    color: '#d9d9d9',
+    textAlign: 'center',
+  },
+});
