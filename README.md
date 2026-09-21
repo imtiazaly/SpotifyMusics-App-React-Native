@@ -1,97 +1,149 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🎵 Spotify Musics App - React Native
 
-# Getting Started
+A fully professional, premium, Spotify-tier music streaming player built with **React Native (v0.87)**, **React 19**, **TypeScript**, and **@rntp/player** (powered by Android Media3 / ExoPlayer).
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 📱 Screenshots
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="33%">
+        <img src="assets/player2.jpeg" alt="Main Player Screen" width="100%" style="border-radius: 12px;"/>
+        <br />
+        <b>Player Screen</b>
+      </td>
+      <td align="center" width="33%">
+        <img src="assets/player3.jpeg" alt="Queue Bottom Sheet" width="100%" style="border-radius: 12px;"/>
+        <br />
+        <b>Queue & Playlist Drawer</b>
+      </td>
+      <td align="center" width="33%">
+        <img src="assets/player5.jpeg" alt="Player Controls & Options" width="100%" style="border-radius: 12px;"/>
+        <br />
+        <b>Options & Controls</b>
+      </td>
+    </tr>
+  </table>
+</div>
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+---
 
-```sh
-# Using npm
-npm start
+## ✨ Features
 
-# OR using Yarn
-yarn start
+### 🎨 1. Premium Spotify-Style UI & Widescreen Artwork
+- **True 16:9 Widescreen Artwork**: Displays full album covers and video thumbnails edge-to-edge with `resizeMode="contain"` — zero cut-off, cropping, or distortion.
+- **Ambient Glow Halo**: Dynamic colored backlight behind the album card for a deep, floating aesthetic.
+- **Interactive Carousel & Pagination**: Smooth horizontal swipe between tracks with live animated pill pagination dots.
+- **LOSSLESS Audio Pill**: High-fidelity indicator badge with icon.
+- **Top Navigation Header**: Collapse button, uppercase playlist subtitle, and options trigger.
+
+### ⚡ 2. Advanced Playback Engine
+- **Hero Play / Pause Button**: Elevated vibrant green circular control (`#1DB954`) with integrated buffering activity indicator and touch scale feedback.
+- **Shuffle Mode**: Instant shuffle toggle with Spotify green active dot indicator.
+- **3-State Repeat Mode**: Cycles through **Off**, **Repeat All** (with active dot), and **Repeat One** (with a dedicated "1" badge).
+- **10-Second Quick Seek**: Dedicated `-10s` rewind and `+10s` fast-forward pills.
+- **Zero-Lag Track Switching**: Race-condition-free track transitions without re-buffering stutter or freezes.
+
+### 🔊 3. Interactive Progress & Volume Controls
+- **Scrubbable Progress Slider**: Smooth drag scrubbing state (`isSliding`) with tabular elapsed and remaining duration timestamps.
+- **Dedicated Volume Bar**: 0% to 100% slider with dynamic icons (`volume-mute`, `volume-low`, `volume-high`) and instant tap-to-mute/restore.
+
+### 📜 4. Slide-Up Queue / Playlist Drawer
+- Quick-access bottom sheet listing all songs with:
+  - Track indices
+  - Artwork thumbnails
+  - Song titles & artists
+  - Active playing indicator with green soundwave icon
+  - Direct tap-to-play selection
+
+### ⚙️ 5. Options Menu (Playback Speed & Sleep Timer)
+- **Variable Playback Speed**: Select between `0.75x`, `1.0x`, `1.25x`, `1.5x`, and `2.0x`.
+- **Sleep Timer**: Auto-stops playback after `15m`, `30m`, `45m`, or `60m` with a gentle 3-second audio fade-out.
+- **Active Track Card**: Overview card displaying active album art, title, and artist.
+- **Favorite (Heart) System**: Single-tap toggle to like/save songs with Spotify green active styling.
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+| :--- | :--- |
+| **React Native (0.87.1)** | Core mobile framework with modern architecture |
+| **React (19.2.3)** | Component architecture and state management |
+| **TypeScript (6.x)** | Complete static type safety |
+| **@rntp/player (5.9.2)** | Native audio playback engine (Android Media3 ExoPlayer) |
+| **@react-native-community/slider** | Smooth interactive seeking and volume control |
+| **@react-native-vector-icons/ionicons** | Clean, modern icons |
+| **react-native-safe-area-context** | Full device safe-area handling |
+
+---
+
+## 📂 Project Structure
+
+```text
+SpotifyMusics-App-React-Native/
+├── assets/                  # Project screenshots and branding
+├── android/                 # Native Android configuration (Manifest, permissions)
+├── src/
+│   ├── assets/              # Local audio tracks (.mp3)
+│   ├── components/
+│   │   ├── ControlCenter.tsx # Play, Pause, Next, Prev, Shuffle, Repeat, 10s Seek
+│   │   ├── Header.tsx        # Top navigation bar
+│   │   ├── MusicInfo.tsx     # Title, artist, album, and Favorite (Heart) button
+│   │   ├── MusicSlider.tsx   # Scrubbable song progress bar with timestamps
+│   │   ├── OptionsMenu.tsx   # Speed controller and Sleep Timer modal
+│   │   ├── QueueModal.tsx    # Slide-up playlist queue drawer
+│   │   └── VolumeControl.tsx # Interactive volume slider with mute toggle
+│   ├── screens/
+│   │   └── MusicPlayer.tsx   # Main player screen assembling all components
+│   ├── services/
+│   │   ├── loadPlaylist.ts   # Safe queue verification & loading service
+│   │   └── playerSetup.ts    # Resilient TrackPlayer initialization
+│   ├── constants.ts         # Playlist metadata and audio assets
+│   └── App.tsx              # Root component & safe area setup
+├── index.js                 # App entry point & background playback registration
+└── package.json
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 🚀 Getting Started
 
-### Android
+### Prerequisites
+- **Node.js**: `>= 22.11.0`
+- **Android Studio** with Android SDK (API 34+) and Android Emulator (or a physical device with USB debugging enabled).
 
-```sh
-# Using npm
-npm run android
+### Installation & Run
 
-# OR using Yarn
-yarn android
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/imtiazaly/SpotifyMusics-App-React-Native.git
+   cd SpotifyMusics-App-React-Native
+   ```
 
-### iOS
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+3. **Verify TypeScript compilation:**
+   ```bash
+   npx tsc --noEmit
+   ```
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+4. **Start the Metro bundler:**
+   ```bash
+   npm start
+   ```
 
-```sh
-bundle install
-```
+5. **Run on Android:**
+   ```bash
+   npm run android
+   ```
 
-Then, and every time you update your native dependencies, run:
+---
 
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## 📄 License
+This project is open-source and available under the [MIT License](LICENSE).
