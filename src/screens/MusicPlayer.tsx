@@ -5,14 +5,18 @@ import {
   Image,
   StyleSheet,
   View,
+  Text,
+  Pressable,
 } from 'react-native';
 import TrackPlayer, { MediaItem, useActiveMediaItem } from '@rntp/player';
+import Ionicons from '@react-native-vector-icons/ionicons';
 import { playListData } from '../constants';
 import Header from '../components/Header';
 import MusicSlider from '../components/MusicSlider';
 import VolumeControl from '../components/VolumeControl';
 import ControlCenter from '../components/ControlCenter';
 import MusicInfo from '../components/MusicInfo';
+import QueueModal from '../components/QueueModal';
 
 const { width } = Dimensions.get('window');
 
@@ -23,6 +27,14 @@ const MusicPlayer = () => {
   const currentIndexRef = useRef(0);
   const isProgrammaticScroll = useRef(false);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [queueModalVisible, setQueueModalVisible] = useState(false);
+
+  const handleSelectTrackFromQueue = (index: number) => {
+    currentIndexRef.current = index;
+    isProgrammaticScroll.current = true;
+    flatListRef.current?.scrollToIndex({ index, animated: true });
+    TrackPlayer.skipToIndex(index);
+  };
 
   const toggleFavorite = (mediaId?: string) => {
     if (!mediaId) return;
@@ -119,6 +131,30 @@ const MusicPlayer = () => {
       <MusicSlider />
       <ControlCenter />
       <VolumeControl />
+
+      {/* Bottom Footer Bar */}
+      <View style={styles.footerBar}>
+        <View style={styles.deviceSpeakerInfo}>
+          <Ionicons name="phone-portrait-outline" size={16} color="#1DB954" />
+          <Text style={styles.deviceSpeakerText}>Phone Speaker</Text>
+        </View>
+
+        <Pressable
+          onPress={() => setQueueModalVisible(true)}
+          style={({ pressed }) => [styles.queueTrigger, pressed && styles.pressed]}
+          hitSlop={10}
+        >
+          <Ionicons name="list-outline" size={22} color="#FFFFFF" />
+          <Text style={styles.queueTriggerText}>Queue</Text>
+        </Pressable>
+      </View>
+
+      <QueueModal
+        visible={queueModalVisible}
+        onClose={() => setQueueModalVisible(false)}
+        activeTrackId={currentTrack?.mediaId}
+        onSelectTrack={handleSelectTrackFromQueue}
+      />
     </View>
   );
 };
@@ -131,7 +167,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#07161b',
-    paddingBottom: 10,
+    paddingBottom: 6,
   },
   carouselContainer: {
     height: width * 0.86,
@@ -159,5 +195,40 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 16,
+  },
+  footerBar: {
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    paddingTop: 2,
+    paddingBottom: 4,
+  },
+  deviceSpeakerInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  deviceSpeakerText: {
+    color: '#1DB954',
+    fontSize: 12,
+    fontWeight: '600',
+    marginLeft: 6,
+  },
+  queueTrigger: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 8,
+  },
+  queueTriggerText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '700',
+    marginLeft: 6,
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });
