@@ -14,15 +14,14 @@ import MusicPlayer from './screens/MusicPlayer';
 function App() {
   const [isPlyerReady, setIsPlyerReady] = useState(false);
 
-  const setup = () => {
-    let isSetUp = setupMusicPlayer();
-
+  const setup = async () => {
+    const isSetUp = await setupMusicPlayer();
     if (isSetUp) {
-      loadPlaylist();
+      await loadPlaylist();
     }
     setIsPlyerReady(isSetUp);
   };
-
+  
   useEffect(() => {
     setup();
   }, []);
