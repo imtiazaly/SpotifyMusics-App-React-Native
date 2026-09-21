@@ -71,8 +71,7 @@ const ControlCenter = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 56,
-    flex: 1,
+    marginVertical: 8,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

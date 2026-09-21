@@ -10,6 +10,7 @@ import TrackPlayer, { MediaItem, useActiveMediaItem } from '@rntp/player';
 import { playListData } from '../constants';
 import Header from '../components/Header';
 import MusicSlider from '../components/MusicSlider';
+import VolumeControl from '../components/VolumeControl';
 import ControlCenter from '../components/ControlCenter';
 import MusicInfo from '../components/MusicInfo';
 
@@ -117,6 +118,7 @@ const MusicPlayer = () => {
       />
       <MusicSlider />
       <ControlCenter />
+      <VolumeControl />
     </View>
   );
 };
