@@ -17,6 +17,7 @@ import VolumeControl from '../components/VolumeControl';
 import ControlCenter from '../components/ControlCenter';
 import MusicInfo from '../components/MusicInfo';
 import QueueModal from '../components/QueueModal';
+import OptionsMenu from '../components/OptionsMenu';
 
 const { width } = Dimensions.get('window');
 
@@ -28,6 +29,7 @@ const MusicPlayer = () => {
   const isProgrammaticScroll = useRef(false);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [queueModalVisible, setQueueModalVisible] = useState(false);
+  const [optionsModalVisible, setOptionsModalVisible] = useState(false);
 
   const handleSelectTrackFromQueue = (index: number) => {
     currentIndexRef.current = index;
@@ -78,7 +80,10 @@ const MusicPlayer = () => {
 
   return (
     <View style={styles.container}>
-      <Header playlistTitle={currentTrack?.albumTitle || 'Milad & Naat Collection'} />
+      <Header
+        playlistTitle={currentTrack?.albumTitle || 'Milad & Naat Collection'}
+        onOptionsPress={() => setOptionsModalVisible(true)}
+      />
 
       <View style={styles.carouselContainer}>
         <FlatList
@@ -154,6 +159,12 @@ const MusicPlayer = () => {
         onClose={() => setQueueModalVisible(false)}
         activeTrackId={currentTrack?.mediaId}
         onSelectTrack={handleSelectTrackFromQueue}
+      />
+
+      <OptionsMenu
+        visible={optionsModalVisible}
+        onClose={() => setOptionsModalVisible(false)}
+        currentTrack={currentTrack}
       />
     </View>
   );
