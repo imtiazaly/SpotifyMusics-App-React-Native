@@ -51,6 +51,8 @@ const MusicPlayer = () => {
     });
   };
 
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
   // Sync FlatList scroll position when active track changes via Next/Prev buttons
   useEffect(() => {
     if (!activeTrack) return;
@@ -59,6 +61,7 @@ const MusicPlayer = () => {
     );
     if (index !== -1 && index !== currentIndexRef.current) {
       currentIndexRef.current = index;
+      setCurrentSlideIndex(index);
       isProgrammaticScroll.current = true;
       flatListRef.current?.scrollToIndex({ index, animated: true });
     }
@@ -67,12 +70,27 @@ const MusicPlayer = () => {
   const renderArtwork = useCallback(({ item }: { item: MediaItem }) => {
     return (
       <View style={styles.listArtWrapper}>
+        {/* Soft Ambient Glow backdrop */}
+        <View style={styles.ambientGlow} />
+
         <View style={styles.albumContainer}>
-          <Image
-            source={item.artworkUrl ? { uri: item.artworkUrl.toString() } : undefined}
-            style={styles.albumArtImg}
-            resizeMode="cover"
-          />
+          {item.artworkUrl ? (
+            <Image
+              source={{ uri: item.artworkUrl.toString() }}
+              style={styles.albumArtImg}
+              resizeMode="contain"
+            />
+          ) : (
+            <View style={styles.placeholderContainer}>
+              <Ionicons name="musical-notes" size={64} color="#1DB954" />
+            </View>
+          )}
+
+          {/* Lossless Audio Badge */}
+          <View style={styles.losslessBadge}>
+            <Ionicons name="sparkles" size={10} color="#1DB954" />
+            <Text style={styles.losslessText}>LOSSLESS</Text>
+          </View>
         </View>
       </View>
     );
@@ -106,11 +124,14 @@ const MusicPlayer = () => {
             isProgrammaticScroll.current = false;
           }}
           onMomentumScrollEnd={(e) => {
+            const newIndex = Math.round(e.nativeEvent.contentOffset.x / width);
+            if (newIndex >= 0 && newIndex < playListData.length) {
+              setCurrentSlideIndex(newIndex);
+            }
             if (isProgrammaticScroll.current) {
               isProgrammaticScroll.current = false;
               return;
             }
-            const newIndex = Math.round(e.nativeEvent.contentOffset.x / width);
             if (
               newIndex >= 0 &&
               newIndex < playListData.length &&
@@ -126,6 +147,19 @@ const MusicPlayer = () => {
             }, 100);
           }}
         />
+
+        {/* Carousel Pagination Dots */}
+        <View style={styles.paginationDotsRow}>
+          {playListData.map((_, i) => (
+            <View
+              key={i}
+              style={[
+                styles.dot,
+                currentSlideIndex === i && styles.activeDotPill,
+              ]}
+            />
+          ))}
+        </View>
       </View>
 
       <MusicInfo
@@ -181,31 +215,92 @@ const styles = StyleSheet.create({
     paddingBottom: 6,
   },
   carouselContainer: {
-    height: width * 0.86,
+    height: Math.round(width * 0.90 * 0.5625) + 26,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: 4,
   },
   listArtWrapper: {
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
+  },
+  ambientGlow: {
+    position: 'absolute',
+    width: width * 0.84,
+    height: Math.round(width * 0.90 * 0.5625),
+    borderRadius: 16,
+    backgroundColor: '#004d40',
+    opacity: 0.35,
+    transform: [{ scale: 1.05 }],
   },
   albumContainer: {
-    width: width * 0.82,
-    height: width * 0.82,
+    width: width * 0.90,
+    height: Math.round(width * 0.90 * 0.5625),
     borderRadius: 16,
-    backgroundColor: '#0e2329',
+    backgroundColor: '#0c2228',
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.55,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.65,
     shadowRadius: 18,
-    elevation: 12,
+    elevation: 14,
+    borderWidth: 1.5,
+    borderColor: 'rgba(255, 255, 255, 0.12)',
+    overflow: 'hidden',
+    position: 'relative',
   },
   albumArtImg: {
     width: '100%',
     height: '100%',
-    borderRadius: 16,
+    borderRadius: 14,
+  },
+  placeholderContainer: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#071f24',
+  },
+  losslessBadge: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.15)',
+  },
+  losslessText: {
+    color: '#FFFFFF',
+    fontSize: 9,
+    fontWeight: '800',
+    letterSpacing: 1,
+    marginLeft: 4,
+  },
+  paginationDotsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    height: 10,
+  },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    marginHorizontal: 3,
+  },
+  activeDotPill: {
+    width: 18,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#1DB954',
   },
   footerBar: {
     width: '90%',

@@ -7,6 +7,7 @@ import TrackPlayer, {
   RepeatMode,
 } from '@rntp/player';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import { playListData } from '../constants';
 
 const ControlCenter = () => {
   const playing = useIsPlaying();
@@ -72,10 +73,18 @@ const ControlCenter = () => {
   };
 
   const togglePlayback = () => {
-    if (playing) {
-      TrackPlayer.pause();
-    } else {
-      TrackPlayer.play();
+    try {
+      const queue = TrackPlayer.getQueue();
+      if (!queue || queue.length === 0) {
+        TrackPlayer.setMediaItems(playListData);
+      }
+      if (playing) {
+        TrackPlayer.pause();
+      } else {
+        TrackPlayer.play();
+      }
+    } catch (e) {
+      console.warn('togglePlayback error:', e);
     }
   };
 
