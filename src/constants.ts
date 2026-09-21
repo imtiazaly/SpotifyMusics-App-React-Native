@@ -7,7 +7,7 @@ export const playListData: MediaItem[] = [
     artist: 'Hammad Nagri',
     albumTitle: 'Milad Naat 2026',
     artworkUrl: 'https://img.youtube.com/vi/J5IIjyk17SU/maxresdefault.jpg',
-    url: require('./assets/audio/one.mp3') as string,
+    url: require('./assets/audio/one.mp3'),
   },
   {
     mediaId: '2',
@@ -15,7 +15,7 @@ export const playListData: MediaItem[] = [
     artist: 'Hammad Ali Nagri',
     albumTitle: 'New Rabi ul Awal Naat 2025',
     artworkUrl: 'https://img.youtube.com/vi/49_eck_2nvI/maxresdefault.jpg',
-    url: require('./assets/audio/two.mp3') as string,
+    url: require('./assets/audio/two.mp3'),
   },
   {
     mediaId: '3',
@@ -23,7 +23,7 @@ export const playListData: MediaItem[] = [
     artist: 'Sibtain Haider',
     albumTitle: 'TNA Records',
     artworkUrl: 'https://img.youtube.com/vi/p-Gj5Flj0Wk/maxresdefault.jpg',
-    url: require('./assets/audio/three.mp3') as string,
+    url: require('./assets/audio/three.mp3'),
   },
   {
     mediaId: '4',
@@ -31,7 +31,7 @@ export const playListData: MediaItem[] = [
     artist: 'Gul e Zahra',
     albumTitle: 'Rabi ul Awal Kalam 2026',
     artworkUrl: 'https://img.youtube.com/vi/ID8jS0DK-qM/maxresdefault.jpg',
-    url: require('./assets/audio/four.mp3') as string,
+    url: require('./assets/audio/four.mp3'),
   },
   {
     mediaId: '5',
@@ -39,7 +39,7 @@ export const playListData: MediaItem[] = [
     artist: 'Armeena Aijaz',
     albumTitle: 'Rabi Ul Awal 2026 - TNA Records',
     artworkUrl: 'https://img.youtube.com/vi/vgvj32Vxe8s/maxresdefault.jpg',
-    url: require('./assets/audio/five.mp3') as string,
+    url: require('./assets/audio/five.mp3'),
   },
   {
     mediaId: '6',
@@ -47,7 +47,7 @@ export const playListData: MediaItem[] = [
     artist: 'Unknown Artist',
     albumTitle: 'Heart Touching Naat',
     artworkUrl: 'https://img.youtube.com/vi/syEl7yz6LNw/maxresdefault.jpg',
-    url: require('./assets/audio/six.mp3') as string,
+    url: require('./assets/audio/six.mp3'),
   },
   {
     mediaId: '7',
@@ -55,7 +55,7 @@ export const playListData: MediaItem[] = [
     artist: 'Faizan Abbas',
     albumTitle: '13 Rajab Shina Manqabat 2024',
     artworkUrl: 'https://img.youtube.com/vi/mPqEhfyiml8/maxresdefault.jpg',
-    url: require('./assets/audio/seven.mp3') as string,
+    url: require('./assets/audio/seven.mp3'),
   },
   {
     mediaId: '8',
@@ -63,7 +63,7 @@ export const playListData: MediaItem[] = [
     artist: 'Syed Salih Jalali',
     albumTitle: 'New Rabiul Awwal Naat 2026',
     artworkUrl: 'https://img.youtube.com/vi/4OX_nOAPrY4/maxresdefault.jpg',
-    url: require('./assets/audio/eight.mp3') as string,
+    url: require('./assets/audio/eight.mp3'),
   },
   {
     mediaId: '9',
@@ -71,6 +71,6 @@ export const playListData: MediaItem[] = [
     artist: 'Hammad Nagri / Danish Ammar',
     albumTitle: 'New Naat 2026 - Rabi ul Awal 2026',
     artworkUrl: 'https://img.youtube.com/vi/KP9zM2IFefQ/maxresdefault.jpg',
-    url: require('./assets/audio/nine.mp3') as string,
+    url: require('./assets/audio/nine.mp3'),
   },
 ];

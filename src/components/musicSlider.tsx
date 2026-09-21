@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Slider from '@react-native-community/slider';
-import { useProgress } from '@rntp/player';
+import TrackPlayer, { useProgress } from '@rntp/player';
 
 const MusicSlider = () => {
   const { position, duration } = useProgress();
@@ -18,10 +18,13 @@ const MusicSlider = () => {
       <Slider
         value={position}
         minimumValue={0}
-        maximumValue={duration}
+        maximumValue={duration > 0 ? duration : 1}
         minimumTrackTintColor="#FFFFFF"
         maximumTrackTintColor="#000000"
         thumbTintColor="#FFFFFF"
+        onSlidingComplete={(value) => {
+          TrackPlayer.seekTo(value);
+        }}
       />
       <View style={styles.timeContainer}>
         <Text style={styles.time}>{formatTime(position)}</Text>

@@ -2,7 +2,7 @@ import TrackPlayer, { PlayerCommand } from '@rntp/player';
 
 export const setupMusicPlayer = async () => {
   try {
-    await TrackPlayer.setupPlayer({ contentType: 'music' });
+    TrackPlayer.setupPlayer({ contentType: 'music' });
     await TrackPlayer.setCommands({
       capabilities: [
         PlayerCommand.PlayPause,
@@ -12,7 +12,7 @@ export const setupMusicPlayer = async () => {
     });
     return true;
   } catch (error) {
-    console.error('Failed to setup music player:', error);
-    return false;
+    console.warn('Player setup warning or already initialized:', error);
+    return true;
   }
 };

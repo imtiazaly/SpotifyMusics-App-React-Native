@@ -28,9 +28,11 @@ function App() {
 
   if (!isPlyerReady) {
     return (
-      <SafeAreaView>
-        <ActivityIndicator />
-      </SafeAreaView>
+      <SafeAreaProvider>
+        <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#001d23' }}>
+          <ActivityIndicator size="large" color="#1DB954" />
+        </SafeAreaView>
+      </SafeAreaProvider>
     );
   }
 
