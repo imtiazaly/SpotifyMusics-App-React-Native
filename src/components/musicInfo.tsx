@@ -1,21 +1,37 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { PropsWithChildren } from 'react';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { MediaItem } from '@rntp/player';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
-type MusicInfoProps = PropsWithChildren<{
+type MusicInfoProps = {
   track: MediaItem | null | undefined;
-}>;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
+};
 
-const MusicInfo = ({ track }: MusicInfoProps) => {
+const MusicInfo = ({ track, isFavorite = false, onToggleFavorite }: MusicInfoProps) => {
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.name}>{track?.title || 'Unknown Title'}</Text>
-        <Text style={styles.artist}>
-          {track?.artist || 'Unknown Artist'} .
-          {track?.albumTitle || 'Unknown Album'}
+      <View style={styles.textContainer}>
+        <Text style={styles.name} numberOfLines={1}>
+          {track?.title || 'Unknown Title'}
+        </Text>
+        <Text style={styles.artist} numberOfLines={1}>
+          {track?.artist || 'Unknown Artist'}
+          {track?.albumTitle ? ` • ${track.albumTitle}` : ''}
         </Text>
       </View>
+
+      <Pressable
+        onPress={onToggleFavorite}
+        style={({ pressed }) => [styles.favoriteButton, pressed && styles.pressed]}
+        hitSlop={12}
+      >
+        <Ionicons
+          name={isFavorite ? 'heart' : 'heart-outline'}
+          size={26}
+          color={isFavorite ? '#1DB954' : '#b3b3b3'}
+        />
+      </Pressable>
     </View>
   );
 };
@@ -26,21 +42,36 @@ const styles = StyleSheet.create({
   container: {
     width: '90%',
     marginTop: 18,
-
+    marginBottom: 8,
     flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  textContainer: {
+    flex: 1,
+    marginRight: 16,
   },
   name: {
-    marginBottom: 8,
-    textAlign: 'center',
-
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: '800',
+    color: '#FFFFFF',
+    fontSize: 22,
+    fontWeight: '700',
+    letterSpacing: 0.2,
+    marginBottom: 4,
   },
   artist: {
-    color: '#d9d9d9',
-    textAlign: 'center',
+    color: '#b3b3b3',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  favoriteButton: {
+    padding: 6,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pressed: {
+    opacity: 0.6,
+    transform: [{ scale: 0.9 }],
   },
 });
+
