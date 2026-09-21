@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -18,19 +18,23 @@ const MusicPlayer = () => {
   const flatListRef = useRef<FlatList<MediaItem>>(null);
   const activeTrack = useActiveMediaItem();
   const currentTrack = activeTrack || playListData[0];
+  const currentIndexRef = useRef(0);
+  const isProgrammaticScroll = useRef(false);
 
-  // Sync FlatList scroll position when active track changes (e.g. Next/Prev button pressed)
+  // Sync FlatList scroll position when active track changes via Next/Prev buttons
   useEffect(() => {
     if (!activeTrack) return;
     const index = playListData.findIndex(
       (item) => item.mediaId === activeTrack.mediaId || item.title === activeTrack.title
     );
-    if (index !== -1) {
+    if (index !== -1 && index !== currentIndexRef.current) {
+      currentIndexRef.current = index;
+      isProgrammaticScroll.current = true;
       flatListRef.current?.scrollToIndex({ index, animated: true });
     }
   }, [activeTrack]);
 
-  const renderArtwork = ({ item }: { item: MediaItem }) => {
+  const renderArtwork = useCallback(({ item }: { item: MediaItem }) => {
     return (
       <View style={styles.listArtWrapper}>
         <View style={styles.albumContainer}>
@@ -42,7 +46,7 @@ const MusicPlayer = () => {
         </View>
       </View>
     );
-  };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -59,9 +63,24 @@ const MusicPlayer = () => {
           offset: width * index,
           index,
         })}
+        initialNumToRender={2}
+        maxToRenderPerBatch={2}
+        windowSize={3}
+        onScrollBeginDrag={() => {
+          isProgrammaticScroll.current = false;
+        }}
         onMomentumScrollEnd={(e) => {
+          if (isProgrammaticScroll.current) {
+            isProgrammaticScroll.current = false;
+            return;
+          }
           const newIndex = Math.round(e.nativeEvent.contentOffset.x / width);
-          if (newIndex >= 0 && newIndex < playListData.length) {
+          if (
+            newIndex >= 0 &&
+            newIndex < playListData.length &&
+            newIndex !== currentIndexRef.current
+          ) {
+            currentIndexRef.current = newIndex;
             TrackPlayer.skipToIndex(newIndex);
           }
         }}
