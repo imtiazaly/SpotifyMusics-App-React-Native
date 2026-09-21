@@ -7,10 +7,10 @@ import {
   Pressable,
   Image,
   ScrollView,
-  SafeAreaView,
 } from 'react-native';
 import TrackPlayer, { MediaItem } from '@rntp/player';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type OptionsMenuProps = {
   visible: boolean;
@@ -76,7 +76,11 @@ const OptionsMenu = ({ visible, onClose, currentTrack }: OptionsMenuProps) => {
             <View style={styles.dragPill} />
             <View style={styles.trackCard}>
               <Image
-                source={{ uri: currentTrack?.artworkUrl?.toString() }}
+                source={
+                  currentTrack?.artworkUrl
+                    ? { uri: currentTrack.artworkUrl.toString() }
+                    : undefined
+                }
                 style={styles.thumbnail}
                 resizeMode="cover"
               />
@@ -108,13 +112,17 @@ const OptionsMenu = ({ visible, onClose, currentTrack }: OptionsMenuProps) => {
             {/* Section 1: Playback Speed */}
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
-                <Ionicons name="speedometer-outline" size={20} color="#1DB954" />
+                <Ionicons
+                  name="speedometer-outline"
+                  size={20}
+                  color="#1DB954"
+                />
                 <Text style={styles.sectionTitle}>Playback Speed</Text>
                 <Text style={styles.activeValueBadge}>{speed}x</Text>
               </View>
 
               <View style={styles.speedRow}>
-                {SPEED_OPTIONS.map((item) => {
+                {SPEED_OPTIONS.map(item => {
                   const isSelected = speed === item;
                   return (
                     <Pressable
@@ -152,7 +160,7 @@ const OptionsMenu = ({ visible, onClose, currentTrack }: OptionsMenuProps) => {
               </View>
 
               <View style={styles.timerList}>
-                {TIMER_OPTIONS.map((opt) => {
+                {TIMER_OPTIONS.map(opt => {
                   const minutes = opt.seconds / 60;
                   const isSelected = activeTimerMinutes === minutes;
 
@@ -193,7 +201,11 @@ const OptionsMenu = ({ visible, onClose, currentTrack }: OptionsMenuProps) => {
                       pressed && styles.pressed,
                     ]}
                   >
-                    <Ionicons name="close-circle-outline" size={18} color="#FF5252" />
+                    <Ionicons
+                      name="close-circle-outline"
+                      size={18}
+                      color="#FF5252"
+                    />
                     <Text style={styles.cancelTimerText}>Turn Off Timer</Text>
                   </Pressable>
                 )}

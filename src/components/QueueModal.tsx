@@ -6,11 +6,11 @@ import {
   FlatList,
   Image,
   Pressable,
-  SafeAreaView,
 } from 'react-native';
-import TrackPlayer, { MediaItem } from '@rntp/player';
+import { MediaItem } from '@rntp/player';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { playListData } from '../constants';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type QueueModalProps = {
   visible: boolean;
@@ -45,7 +45,9 @@ const QueueModal = ({
         </Text>
 
         <Image
-          source={{ uri: item.artworkUrl?.toString() }}
+          source={
+            item.artworkUrl ? { uri: item.artworkUrl.toString() } : undefined
+          }
           style={styles.thumbnail}
           resizeMode="cover"
         />

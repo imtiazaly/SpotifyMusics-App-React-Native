@@ -69,7 +69,7 @@ const MusicPlayer = () => {
       <View style={styles.listArtWrapper}>
         <View style={styles.albumContainer}>
           <Image
-            source={{ uri: item.artworkUrl?.toString() }}
+            source={item.artworkUrl ? { uri: item.artworkUrl.toString() } : undefined}
             style={styles.albumArtImg}
             resizeMode="cover"
           />
